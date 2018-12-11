@@ -1,0 +1,31 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": ["**/*.test.*", "CalippoClient.ts"]
+  },
+  "rules": {
+    "max-line-length": {
+      "options": [250]
+    },
+    "trailing-comma": true,
+    "object-literal-shorthand": false,
+    "object-literal-sort-keys": false,
+    "jsx-self-close": false,
+    "jsx-no-lambda": false,
+    "interface-name": false,
+    "member-access": false,
+    "member-ordering": [true, { "order": "fields-first" }],
+    "no-empty-interface": false,
+    "ordered-imports": [false],
+    "quotemark": [true, "double", "jsx-double"],
+    "triple-equals": [true, "allow-null-check"],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore"
+    ]
+  }
+}

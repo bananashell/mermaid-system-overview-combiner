@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json.schemastore.org/web-manifest",
+    "lang": "sv",
+    "background_color": "#ff8b1d",
+    "theme_color": "#ff8b1d",
+    "name": "Movestic",
+    "orientation": "portrait-primary",
+    "icons": [{
+        "src": "assets/images/movestic-logo.svg",
+        "sizes": "48x48"
+    }],
+    "display": "minimal-ui"
+}

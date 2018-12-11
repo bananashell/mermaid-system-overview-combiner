@@ -1,0 +1,27 @@
+{
+  "printWidth": 100,
+  "parser": "typescript",
+  "jsxBracketSameLine": false,
+  "useTabs": false,
+  "semi": true,
+  "tabWidth": 4,
+  "singleQuote": false,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": "*.scss",
+      "options": {
+        "parser": "scss",
+        "useTabs": false,
+        "tabWidth": 4
+      }
+    },
+    {
+      "files": "*.json",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}

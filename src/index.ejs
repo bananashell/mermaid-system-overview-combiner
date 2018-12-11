@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+
+    <% for (var cssFile in htmlWebpackPlugin.files.css) {  %>
+        <link rel="stylesheet" href="/<%=htmlWebpackPlugin.files.css[cssFile] %>" />
+    <% } %>
+</head>
+
+<body>
+    <div id="root">
+        
+    </div>
+
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) {  %>
+        <% if ( htmlWebpackPlugin.files.chunks[chunk] != htmlWebpackPlugin.files.chunks.epiComponents){ %>
+            <script src="/<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+        <% } %>
+    <% } %>
+</body>
+
+</html>
