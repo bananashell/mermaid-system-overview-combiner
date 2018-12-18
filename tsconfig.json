@@ -12,7 +12,8 @@
         "moduleResolution": "node",
         "rootDirs": ["src/scripts"],
         "typeRoots": ["node_modules/@types", "@types"],
-        "lib": ["es2017", "dom.iterable", "dom"]
+        "lib": ["es2017", "dom.iterable", "dom"],
+        "resolveJsonModule": true
     },
     "exclude": ["node_modules"]
 }
