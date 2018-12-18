@@ -1,0 +1,16 @@
+{
+    "systems": [
+        {
+            "name": "Calippo",
+            "code": "```mermaid\ngraph TD; Calippo --> Arca; Calippo --> IncaGate;\n```"
+        },
+        {
+            "name": "Arca",
+            "code": "```mermaid\ngraph TD; Arca --> Arca.Batch\n```"
+        },
+        {
+            "name": "Noa",
+            "code": "```mermaid\ngraph TD; Noa --> IncaGate\n```"
+        }
+    ]
+}
