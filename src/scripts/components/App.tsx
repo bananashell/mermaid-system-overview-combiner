@@ -35,10 +35,6 @@ class App extends React.Component<{}, State> {
                 <div>
                     <span>Active:</span>
                     <span>{this.state.activeSystems.map((s) => s)}</span>
-                    {codes.length}
-                    {/* {codes.map((c, index) => (
-                        <div key={index}>{c}</div>
-                    ))} */}
                 </div>
                 {config.systems.map((system, index) => {
                     return (

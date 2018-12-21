@@ -21,7 +21,7 @@ export class Mermaid extends React.PureComponent<Props> {
         const code =
             this.props.code &&
             `${this.props.code.type}; ${this.props.code.declarations.join("; ")}`;
-        console.log(code);
+
         try {
             mermaid.parse(code);
         } catch (e) {
