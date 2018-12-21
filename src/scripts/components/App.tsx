@@ -3,24 +3,15 @@ import Mermaid from "components/Mermaid";
 import { produce } from "immer";
 import * as config from "config.json";
 import { xor as _xor } from "lodash";
+import { combineMermaid, convertToMermaidContent } from "markdownUtil";
 
 interface State {
-    code: string;
     activeSystems: string[];
 }
 
 class App extends React.Component<{}, State> {
     state: State = {
-        code: "graph TD; Calippo --> Arca",
         activeSystems: []
-    };
-
-    updateCode = (code: string) => {
-        this.setState(
-            produce<State>((draft) => {
-                draft.code = code;
-            })
-        );
     };
 
     toggleSystem = (system: { name: string; code: string }) => {
@@ -32,11 +23,27 @@ class App extends React.Component<{}, State> {
     };
 
     render() {
+        const codes = config.systems
+            .filter((s) => this.state.activeSystems.includes(s.name))
+            .map((s) => s.code)
+            .map(convertToMermaidContent);
+
+        const combinedCode = combineMermaid(codes);
+
         return (
             <div>
-                {config.systems.map((system) => {
+                <div>
+                    <span>Active:</span>
+                    <span>{this.state.activeSystems.map((s) => s)}</span>
+                    {codes.length}
+                    {/* {codes.map((c, index) => (
+                        <div key={index}>{c}</div>
+                    ))} */}
+                </div>
+                {config.systems.map((system, index) => {
                     return (
                         <button
+                            key={index}
                             className={
                                 this.state.activeSystems.includes(system.name) ? "active" : ""
                             }
@@ -47,11 +54,7 @@ class App extends React.Component<{}, State> {
                     );
                 })}
 
-                <textarea
-                    onChange={(e) => this.updateCode(e.target.value)}
-                    value={this.state.code}
-                />
-                <Mermaid code={this.state.code} />
+                <Mermaid code={combinedCode} />
             </div>
         );
     }

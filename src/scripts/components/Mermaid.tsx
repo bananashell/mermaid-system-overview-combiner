@@ -1,9 +1,10 @@
 import * as React from "react";
 import mermaid from "mermaid";
 import { withErrorBoundary, ErrorBoundaryProps } from "components/error/WithErrorBoundary";
+import { MermaidContent } from "markdownUtil";
 
 interface OwnProps {
-    code: string;
+    code: MermaidContent;
 }
 
 type Props = OwnProps & ErrorBoundaryProps;
@@ -17,17 +18,17 @@ export class Mermaid extends React.PureComponent<Props> {
         if (this.props.hasError) {
             return <div>💩</div>;
         }
+        const code =
+            this.props.code &&
+            `${this.props.code.type}; ${this.props.code.declarations.join("; ")}`;
+        console.log(code);
         try {
-            mermaid.parse(this.props.code);
+            mermaid.parse(code);
         } catch (e) {
             return <div>{e.str}</div>;
         }
 
-        const mermaidOutput = mermaid.render(
-            `test-${Date.now() % 100}`,
-            this.props.code,
-            (svg) => {}
-        );
+        const mermaidOutput = mermaid.render(`test-${Date.now() % 100}`, code, (svg) => {});
 
         return <div dangerouslySetInnerHTML={{ __html: mermaidOutput }} />;
     }

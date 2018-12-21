@@ -1,6 +1,6 @@
 const MERMAID_REGEX = /```mermaid\s(.*?)\s```/s;
 
-interface MermaidContent {
+export interface MermaidContent {
     type: string;
     declarations: string[];
 }
@@ -24,6 +24,9 @@ export const splitRowsOrSemicolon = (content: string): string[] => {
     return rows.map((r) => r.trim()).filter((r) => r && r.length > 0);
 };
 
+export const convertToMermaidContents = (...markdown: string[]): MermaidContent[] => {
+    return markdown.map(convertToMermaidContent);
+};
 export const convertToMermaidContent = (markdown: string): MermaidContent => {
     const mermaidContent = parseMermaid(markdown);
     const rows = splitRowsOrSemicolon(mermaidContent);
@@ -40,4 +43,23 @@ export const convertToMermaidContent = (markdown: string): MermaidContent => {
     return output;
 };
 
-export const combineMermaid = (...mermaidContents: MermaidContent[]) => {};
+export const combineMermaid = (mermaidContents: MermaidContent[]) => {
+    if (!mermaidContents.length) {
+        return null;
+    }
+
+    const verifyAllOfSameType = () =>
+        mermaidContents.every((m) => m.type === mermaidContents[0].type);
+    if (!verifyAllOfSameType()) {
+        throw Error("array contains multiple mermaid types");
+    }
+
+    const output: MermaidContent = {
+        type: mermaidContents[0].type,
+        declarations: mermaidContents.reduce((prev, curr) => {
+            return [...prev, ...curr.declarations];
+        }, [])
+    };
+
+    return output;
+};
